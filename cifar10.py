@@ -2,6 +2,8 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 
+print ("torch version=" + torch.__version__)
+
 transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])

@@ -1,22 +1,33 @@
 import torch
-print(torch.__version__)
-x = torch.empty(5, 3)
-print(type(x[0][0]))
-z = x[0][0]
-print(type(z))
-a = torch.ones(6)
 
-d=a.view(2,3)
-b=a
-a[1]=4
+# By default, it concatenates along the first axis (concatenates rows)
+x_1 = torch.randn(2, 5)
+y_1 = torch.randn(3, 5)
+z_1 = torch.cat([x_1, y_1])
+print(z_1)
+
+# Concatenate columns:
+x_2 = torch.randn(2, 3)
+y_2 = torch.randn(2, 5)
+# second arg specifies which axis to concat along
+z_2 = torch.cat([x_2, y_2], 1)
+print(z_2)
 
 
-# let us run this cell only if CUDA is available
-# We will use ``torch.device`` objects to move tensors in and out of GPU
-if torch.cuda.is_available():
-    device = torch.device("cuda")          # a CUDA device object
-    y = torch.ones_like(x, device=device)  # directly create a tensor on GPU
-    x = x.to(device)                       # or just use strings ``.to("cuda")``
-    z = x + y
-    print(z)
-    print(z.to("cpu", torch.double))       # ``.to`` can also change dtype together!
+class myclass():
+    def __init__(self, kernel=3):
+        self.kernel = kernel
+
+    def getKernel(self):
+        return self.kernel
+
+    @staticmethod
+    def getSKernel():
+        return 7
+
+kernel = 5
+A = myclass(5)
+b = A.getKernel()
+
+c= myclass.getSKernel()
+pass
